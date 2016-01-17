@@ -53,21 +53,20 @@ $(document).ready(function(){
              tablo_temp_suggestions.push(index_element.value);
           });
           if ($combobox_case_sensitive === 'no'){
-		          // order case tablo_temp_suggestions
-			        tablo_suggestions[index_lisible] = tablo_temp_suggestions.sort(function(a,b) {
-												a = a.toLowerCase();
-												b = b.toLowerCase();
-												if ( a == b) {
-													return 0;
-													}
-												if( a > b) {
-													return 1;
-													}
-												return -1;
-												});
-		      }
-		      else { tablo_suggestions[index_lisible] = tablo_temp_suggestions.sort(); }
-          
+              // order case tablo_temp_suggestions
+              tablo_suggestions[index_lisible] = tablo_temp_suggestions.sort(function(a,b) {
+                                                    a = a.toLowerCase();
+                                                    b = b.toLowerCase();
+                                                    if ( a == b) {
+                                                        return 0;
+                                                    }
+                                                    if ( a > b) {
+                                                       return 1;
+                                                       }
+                                                    return -1;
+                                                    });
+          }
+          else { tablo_suggestions[index_lisible] = tablo_temp_suggestions.sort(); }
           
           // wrap into a container
           $this.wrap('<div class="' + $combobox_prefix_class + 'container js-container" data-combobox-prefix-class="' + $combobox_prefix_class + '"></div>');
@@ -97,7 +96,7 @@ $(document).ready(function(){
       // keydown on field
       $body.on( 'keyup', '.js-combobox', function( event ) {
          var $this = $(this),
-		     options_combo = $this.data(),
+             options_combo = $this.data(),
              $container = $this.parent(),
              $form = $container.parents('form'),
              options = $container.data(),
@@ -113,65 +112,66 @@ $(document).ready(function(){
              value_to_search = $this.val(),
              text_number_suggestions = '';
         
-		if ( event.keyCode === 13  ) {
-		   $form.submit();
-		}
-		else {
+         if ( event.keyCode === 13  ) {
+            $form.submit();
+         }
+         else {
 		
-			if ( event.keyCode !== 27  ) { // No Escape
+              if ( event.keyCode !== 27  ) { // No Escape
           
-				$this.attr( 'data-lastval', value_to_search );
-				// search for text suggestion in the array tablo_suggestions[index_table]
-				var size_tablo = tablo_suggestions[index_table].length,
-					i = 0,
-					counter = 0;
+                 $this.attr( 'data-lastval', value_to_search );
+                 // search for text suggestion in the array tablo_suggestions[index_table]
+                 var size_tablo = tablo_suggestions[index_table].length,
+                     i = 0,
+                     counter = 0;
                
-				$suggestions.empty();				
+                 $suggestions.empty();				
 				
-				if ( value_to_search != '' ){
-					while ( i<size_tablo ){ 
-						if ( 
-							( $combobox_case_sensitive==='yes' && tablo_suggestions[index_table][i].substring(0,value_to_search.length) === value_to_search )
-							||
-							( $combobox_case_sensitive==='no' && tablo_suggestions[index_table][i].substring(0,value_to_search.length).toUpperCase() === value_to_search.toUpperCase() )
-							) {
-							$suggestions.append( '<div id="suggestion-' + index_table + '-' + counter + '" class="js-suggestion ' + $combobox_prefix_class + 'suggestion" tabindex="-1" role="option">' + tablo_suggestions[index_table][i] + '</div>' );
-							counter++;
-							}
-						i++;
-          }
+                 if ( value_to_search != '' ){
+                     while ( i<size_tablo ) { 
+                           if ( 
+                               ( $combobox_case_sensitive==='yes' && tablo_suggestions[index_table][i].substring(0,value_to_search.length) === value_to_search )
+                               ||
+                               ( $combobox_case_sensitive==='no' && tablo_suggestions[index_table][i].substring(0,value_to_search.length).toUpperCase() === value_to_search.toUpperCase() )
+                              ) {
+                               $suggestions.append( '<div id="suggestion-' + index_table + '-' + counter + '" class="js-suggestion ' + $combobox_prefix_class + 'suggestion" tabindex="-1" role="option">' + tablo_suggestions[index_table][i] + '</div>' );
+                               counter++;
+                           }
+                           i++;
+                     }
                   
-				   // update number of suggestions
-				  if ( counter > 1 ){
-					    text_number_suggestions = $combobox_suggestion_plural + counter + ' ' + $combobox_suggestion_word + 's.';
-          }
-				  if ( counter === 1 ){
-					    text_number_suggestions = $combobox_suggestion_single + counter + ' ' + $combobox_suggestion_word + '.';
-          }
-          if ( counter === 0 ){
-					    text_number_suggestions = $combobox_suggestion_single + counter + ' ' + $combobox_suggestion_word + '.';
-          }
-          if ( counter >= 0 ){
-             var text_number_suggestions_default = $suggestions_text.text();
-					   if (text_number_suggestions != text_number_suggestions_default) { // trick to make it work on all AT
-						     suggestions_to_add=$("<p>").text(text_number_suggestions);
-						     $suggestions_text.attr('aria-live','polite');
-						     $suggestions_text.empty();
-				  		   $suggestions_text.append(suggestions_to_add);
-					   }
-          }          
-				}
+                     // update number of suggestions
+                     if ( counter > 1 ){
+                        text_number_suggestions = $combobox_suggestion_plural + counter + ' ' + $combobox_suggestion_word + 's.';
+                     }
+                     if ( counter === 1 ){
+                        text_number_suggestions = $combobox_suggestion_single + counter + ' ' + $combobox_suggestion_word + '.';
+                     }
+                     if ( counter === 0 ){
+                        text_number_suggestions = $combobox_suggestion_single + counter + ' ' + $combobox_suggestion_word + '.';
+                     }
+                     if ( counter >= 0 ){
+                        var text_number_suggestions_default = $suggestions_text.text();
+                        if (text_number_suggestions != text_number_suggestions_default) { // trick to make it work on all AT
+                           suggestions_to_add=$("<p>").text(text_number_suggestions);
+                           $suggestions_text.attr('aria-live','polite');
+                           $suggestions_text.empty();
+                           $suggestions_text.append(suggestions_to_add);
+                           }
+                        }          
+
+                 }
             
-			}
-		}
+              }
+             }
       
       })
       .on('click', function(event) {
           var $target = $(event.target),
-		          $suggestions_text = $('.js-suggestion-text:not(:empty)'), // if a suggestion text is not empty => suggestion opened somewhere
-			        $container = $suggestions_text.parents('.js-container'),
-			        $input_text = $container.find('.js-combobox'),
-			        $suggestions = $container.find('.js-suggest div');
+              $suggestions_text = $('.js-suggestion-text:not(:empty)'), // if a suggestion text is not empty => suggestion opened somewhere
+              $container = $suggestions_text.parents('.js-container'),
+              $input_text = $container.find('.js-combobox'),
+              $suggestions = $container.find('.js-suggest div');
 
          // if click outside => close opened suggestions 
          if ( !$target.is('.js-suggestion') && !$target.is('.js-combobox') && $suggestions_text.length) {
@@ -221,14 +221,14 @@ $(document).ready(function(){
             $input_text.val( $input_text.attr('data-lastval') );
             $suggestions.empty();
             $suggestions_text.empty();
-			      setTimeout(function(){ $input_text.focus() }, 300); // timeout to avoid problem in suggestions display
+            setTimeout(function(){ $input_text.focus() }, 300); // timeout to avoid problem in suggestions display
             event.preventDefault();
          }
          if ( event.keyCode == 13 || event.keyCode == 32 ) { // Enter or space
             $input_text.val( $this.html() );
             $suggestions.empty();
             $suggestions_text.empty();
-			      setTimeout(function(){ $input_text.focus() }, 300); // timeout to avoid problem in suggestions display
+            setTimeout(function(){ $input_text.focus() }, 300); // timeout to avoid problem in suggestions display
             event.preventDefault();
          }
          if ( ( !event.shiftKey && event.keyCode == 9 ) || event.keyCode == 40 ) { // tab or bottom
@@ -236,17 +236,17 @@ $(document).ready(function(){
                $input_text.val($next_suggestion.html());
                $next_suggestion.focus();
             }
-			      else {
-				         $input_text.val( $input_text.attr('data-lastval') );
-				         if ( !event.shiftKey && event.keyCode == 9 ) { // tab closes the list
-					          var e = jQuery.Event("keydown");
-					          e.which = 27; // # Some key code value
-					          e.keyCode = 27;
-				            $this.trigger(e);
-				            }
-					          else { setTimeout(function(){ $input_text.focus() }, 300); } // timeout to avoid problem in suggestions display
+            else {
+                  $input_text.val( $input_text.attr('data-lastval') );
+                  if ( !event.shiftKey && event.keyCode == 9 ) { // tab closes the list
+                      var e = jQuery.Event("keydown");
+                      e.which = 27; // # Some key code value
+                      e.keyCode = 27;
+                      $this.trigger(e);
+                  }
+                  else { setTimeout(function(){ $input_text.focus() }, 300); } // timeout to avoid problem in suggestions display
 				 
-			           }
+                 }
             event.preventDefault();
          }
 
@@ -255,9 +255,9 @@ $(document).ready(function(){
                $input_text.val($previous_suggestion.html());
                $previous_suggestion.focus();
             }
-			       else {
-				          $input_text.val( $input_text.attr('data-lastval') ).focus();
-			            }
+            else {
+                  $input_text.val( $input_text.attr('data-lastval') ).focus();
+                 }
             event.preventDefault();
          }
       })
