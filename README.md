@@ -197,3 +197,4 @@ It is lightweight: 14kb(development), 6kb (minified), only 1.7kb minified and gz
 
 The idea of this script is inspired by [Heydon’s basic autocomplete with listbox demo](https://twitter.com/heydonworks/status/655433134813655040). Aurélien Levy enhanced it with a working prototype, and I’ve finished the work (packaging, reutilisability, progressive enhancement, etc.) with Aurélien.
 
+<img src="http://www.nicolas-hoffmann.net/bordel/chuck-norris1.jpg" alt="Chuck Norris approved" />
