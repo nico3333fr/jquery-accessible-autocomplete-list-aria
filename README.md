@@ -37,7 +37,7 @@ First, add a class js-combobox on an input with a working datalist:```
  </datalist>
 ```
 
-Then download the plugin and use jQuery of course.
+Then download the plugin and use jQuery of course. This plugin is also available on NPMjs.com and can be installed using ```npm i jquery-accessible-autocomplete-list-aria```: https://www.npmjs.com/package/jquery-accessible-autocomplete-list-aria
 
 You may use some options, so have a look at plugin options. 
 
