@@ -152,7 +152,7 @@ $(document).ready(function(){
                      }
                      if ( counter >= 0 ){
                         var text_number_suggestions_default = $suggestions_text.text();
-                        if (text_number_suggestions != text_number_suggestions_default) { // trick to make it work on all AT
+                        if (text_number_suggestions != text_number_suggestions_default) { // @Goestu trick to make it work on all AT
                            suggestions_to_add=$("<p>").text(text_number_suggestions);
                            $suggestions_text.attr('aria-live','polite');
                            $suggestions_text.empty();
@@ -160,9 +160,9 @@ $(document).ready(function(){
                            }
                         }          
 
-                 }
+                     }
             
-              }
+                }
              }
       
       })
@@ -188,22 +188,25 @@ $(document).ready(function(){
              $suggestions = $container.find('.js-suggest div'),
              $suggestion_list = $suggestions.find('.js-suggestion'),
              $suggestions_text = $container.find('.js-suggestion-text'),
+             $autorise_tab_options = typeof $this.attr('data-combobox-notab-options') !== 'undefined' ? false : true,
              $first_suggestion = $suggestion_list.first();
           
-         if ( ( !event.shiftKey && event.keyCode == 9 ) || event.keyCode == 40 ) { // tab or bottom
+         if ( ( !event.shiftKey && event.keyCode == 9 && $autorise_tab_options ) || event.keyCode == 40 ) { // tab (if authorised) or bottom
             // See if there are suggestions, and yes => focus on first one
             if ($suggestion_list.length) {
                $input_text.val($first_suggestion.html());
                $suggestion_list.first().focus();
                event.preventDefault();
-            }
+               }
          }
-         if ( event.keyCode == 27 ) { // esc
+         if ( event.keyCode == 27 || ($autorise_tab_options === false && event.keyCode == 9 ) ) { // esc or (tab/shift tab + notab option) = close
             $input_text.val( $input_text.attr('data-lastval') );
             $suggestions.empty();
             $suggestions_text.empty();
-            setTimeout(function(){ $input_text.focus() }, 300); // timeout to avoid problem in suggestions display
-            event.preventDefault();
+            if ( event.keyCode == 27) { // Esc prevented only, tab can go :)
+               event.preventDefault();
+               setTimeout(function(){ $input_text.focus(); }, 300); // timeout to avoid problem in suggestions display
+               }
          }
 		 
       })
@@ -212,54 +215,60 @@ $(document).ready(function(){
          var $this = $(this),
              $container = $this.parents('.js-container'),
              $input_text = $container.find('.js-combobox'),
+             $autorise_tab_options = typeof $input_text.attr('data-combobox-notab-options') !== 'undefined' ? false : true,
              $suggestions = $container.find('.js-suggest div'),
              $suggestions_text = $container.find('.js-suggestion-text'),
              $next_suggestion = $this.next(),
              $previous_suggestion = $this.prev();
 
-         if ( event.keyCode == 27 ) { // esc
+         if ( event.keyCode == 27 || ($autorise_tab_options === false && event.keyCode == 9 ) ) { // esc or (tab/shift tab + notab option) = close
             $input_text.val( $input_text.attr('data-lastval') );
             $suggestions.empty();
             $suggestions_text.empty();
-            setTimeout(function(){ $input_text.focus() }, 300); // timeout to avoid problem in suggestions display
-            event.preventDefault();
-         }
+            if ( event.keyCode == 27) { // Esc prevented only, tab can go :)
+               setTimeout(function(){ $input_text.focus(); }, 300); // timeout to avoid problem in suggestions display
+               event.preventDefault();
+               }
+            if ( $autorise_tab_options === false && event.keyCode == 9 ) {
+               $input_text.focus();
+               }
+            }
          if ( event.keyCode == 13 || event.keyCode == 32 ) { // Enter or space
             $input_text.val( $this.html() );
             $suggestions.empty();
             $suggestions_text.empty();
-            setTimeout(function(){ $input_text.focus() }, 300); // timeout to avoid problem in suggestions display
+            setTimeout(function(){ $input_text.focus(); }, 300); // timeout to avoid problem in suggestions display
             event.preventDefault();
-         }
-         if ( ( !event.shiftKey && event.keyCode == 9 ) || event.keyCode == 40 ) { // tab or bottom
+            }
+         if ( ( !event.shiftKey && event.keyCode == 9 && $autorise_tab_options ) || event.keyCode == 40 ) { // tab (if authorised) or bottom
             if ($next_suggestion.length) {
                $input_text.val($next_suggestion.html());
                $next_suggestion.focus();
-            }
-            else {
-                  $input_text.val( $input_text.attr('data-lastval') );
-                  if ( !event.shiftKey && event.keyCode == 9 ) { // tab closes the list
-                      var e = jQuery.Event("keydown");
-                      e.which = 27; // # Some key code value
-                      e.keyCode = 27;
-                      $this.trigger(e);
-                  }
-                  else { setTimeout(function(){ $input_text.focus() }, 300); } // timeout to avoid problem in suggestions display
+               }
+               else {
+                    $input_text.val( $input_text.attr('data-lastval') );
+                    if ( !event.shiftKey && event.keyCode == 9 ) { // tab closes the list
+                        var e = jQuery.Event("keydown");
+                        e.which = 27; // # Some key code value
+                        e.keyCode = 27;
+                        $this.trigger(e);
+                        }
+                        else { setTimeout(function(){ $input_text.focus(); }, 300); } // timeout to avoid problem in suggestions display
 				 
-                 }
+                    }
             event.preventDefault();
-         }
+            }
 
-         if ( ( event.shiftKey && event.keyCode == 9 ) || event.keyCode == 38 ) { // top or Maj+tab
+         if ( ( event.shiftKey && event.keyCode == 9  && $autorise_tab_options ) || event.keyCode == 38 ) { // top or Maj+tab (if authorised)
             if ($previous_suggestion.length) {
                $input_text.val($previous_suggestion.html());
                $previous_suggestion.focus();
-            }
-            else {
-                  $input_text.val( $input_text.attr('data-lastval') ).focus();
-                 }
+               }
+               else {
+                     $input_text.val( $input_text.attr('data-lastval') ).focus();
+                    }
             event.preventDefault();
-         }
+            }
       })
       // clear button
       .on( 'click', '.js-clear-button', function( event ) {
