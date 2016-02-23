@@ -67,6 +67,7 @@ You may adapt texts to your need with it. However, if you need to customize one 
 - ```data-suggestion-single```: to override suggestion_single in the config, will be vocalized when there is 1 suggestion.
 - ```data-suggestion-plural```: to override suggestion_plural in the config, will be vocalized when there are more several suggestions.
 - ```data-suggestion-word```: to override suggestion_word in the config.
+- ```data-combobox-notab-options="yes"```: if you don’t want to enable the <kbd>tab</kbd> key to go into/through suggestions.
 
 Have a look at [the second example of the demo](http://a11y.nicolas-hoffmann.net/autocomplet-list/) if you want to see data attributes in action.
 
@@ -170,13 +171,13 @@ With these styles, the focus/hover looks far better, and a border is added aroun
 
 __When focus is on the text input__
 
-- You may use tab to reach suggestions and continue through them;
+- You may use tab to reach suggestions and continue through them (activated by default, can be removed using ```data-combobox-notab-options="yes"```);
 - Esc will close suggestion list;
 - You can also use Down to reach the suggestion list.
 
 __When focus is on the suggestions__
 
-- __Tab/Shift+Tab__ allow to navigate through options;
+- __Tab/Shift+Tab__ allow to navigate through options (activated by default, can be removed using ```data-combobox-notab-options="yes"```);
 - __Enter__ or __Space__ update the value of the input with the currently highlighted option, close the drop-down list and move the focus back to the input;
 - __Esc__ will close suggestion list, give focus back to the text input and remove suggestion in the input (go back to what was typed in);
 - You can also use __Down/Up__ arrows to navigate between suggestions.
