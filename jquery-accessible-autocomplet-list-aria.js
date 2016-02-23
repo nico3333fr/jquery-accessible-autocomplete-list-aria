@@ -222,19 +222,22 @@ $(document).ready(function(){
              $previous_suggestion = $this.prev();
 
          if ( event.keyCode == 27 || ($autorise_tab_options === false && event.keyCode == 9 ) ) { // esc or (tab/shift tab + notab option) = close
-            $input_text.val( $input_text.attr('data-lastval') );
-            $suggestions.empty();
-            $suggestions_text.empty();
             if ( event.keyCode == 27) { // Esc prevented only, tab can go :)
+               $input_text.val( $input_text.attr('data-lastval') );
+               $suggestions.empty();
+               $suggestions_text.empty();
                setTimeout(function(){ $input_text.focus(); }, 300); // timeout to avoid problem in suggestions display
                event.preventDefault();
                }
             if ( $autorise_tab_options === false && event.keyCode == 9 ) {
+               $suggestions.empty();
+               $suggestions_text.empty();
                $input_text.focus();
                }
             }
          if ( event.keyCode == 13 || event.keyCode == 32 ) { // Enter or space
             $input_text.val( $this.html() );
+            $input_text.attr('data-lastval', $this.html() );
             $suggestions.empty();
             $suggestions_text.empty();
             setTimeout(function(){ $input_text.focus(); }, 300); // timeout to avoid problem in suggestions display
