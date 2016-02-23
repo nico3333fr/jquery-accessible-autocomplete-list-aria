@@ -24,7 +24,7 @@ For the design, you can also __customize the CSS to fullfil your needs__.
 
 ##How to use it
 
-First, add a class js-combobox on an input with a working datalist:```
+First, add a class js-combobox on an input with a working datalist:
 ```
 <input type="text" name="mysuper_field" id="id_mysuper_field" class="js-combobox" list="beers" data-combobox-prefix-class="combobox" />
  <datalist id="beers">
