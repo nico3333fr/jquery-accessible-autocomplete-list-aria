@@ -17,6 +17,7 @@ $(document).ready(function(){
        button_clear_title = 'clear this field',
        button_clear_text = 'X',
        case_sensitive = 'yes',
+       min_length = 0,
        tablo_suggestions = [];
 
    if ( $js_combobox.length  ) { // if there are at least one :)
@@ -107,6 +108,7 @@ $(document).ready(function(){
              $combobox_suggestion_single = typeof options_combo.suggestionSingle !== 'undefined' ? options_combo.suggestionSingle : suggestion_single,
              $combobox_suggestion_plural = typeof options_combo.suggestionPlural !== 'undefined' ? options_combo.suggestionPlural : suggestion_plural,
              $combobox_suggestion_word = typeof options_combo.suggestionWord !== 'undefined' ? options_combo.suggestionWord : suggestion_word,
+             combobox_min_length = typeof options_combo.comboboxMinLength !== 'undefined' ? Math.abs(options_combo.comboboxMinLength) : min_length,
              $combobox_case_sensitive = typeof options_combo.comboboxCaseSensitive !== 'undefined' ? options_combo.comboboxCaseSensitive : case_sensitive,
              index_table = $this.attr('data-number'),
              value_to_search = $this.val(),
@@ -125,9 +127,9 @@ $(document).ready(function(){
                      i = 0,
                      counter = 0;
                
-                 $suggestions.empty();				
+                 $suggestions.empty();
 				
-                 if ( value_to_search != '' ){
+                 if ( value_to_search != '' && value_to_search.length > combobox_min_length ){
                      while ( i<size_tablo ) { 
                            if ( 
                                ( $combobox_case_sensitive==='yes' && tablo_suggestions[index_table][i].substring(0,value_to_search.length) === value_to_search )
