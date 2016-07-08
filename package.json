@@ -2,7 +2,7 @@
   "title": "jQuery Accessible Autocomplete List, using ARIA",
   "name": "jquery-accessible-autocomplete-list-aria",
   "description": "This jQuery plugin will transform and enhance a simple text input with a datalist into a wonderful and shiny input with autocomplete, and accessible.",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "keywords": [
     "Accessibility",
     "ARIA",
