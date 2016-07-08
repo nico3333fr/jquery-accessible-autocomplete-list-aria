@@ -39,6 +39,8 @@ First, add a class js-combobox on an input with a working datalist:
 
 Then download the plugin and use jQuery of course. This plugin is also available on NPMjs.com and can be installed using ```npm i jquery-accessible-autocomplete-list-aria```: https://www.npmjs.com/package/jquery-accessible-autocomplete-list-aria
 
+You may also get it from Bower: ```bower install jquery-accessible-autocomplete-list-aria```.
+
 You may use some options, so have a look at plugin options. 
 
 ##Options
@@ -55,6 +57,7 @@ var $js_combobox = $('.js-combobox'),
  button_clear_title = 'clear this field',
  button_clear_text = 'X',
  case_sensitive = 'yes',
+ min_length = 0, 
  tablo_suggestions = [];
 ```
 
@@ -67,6 +70,7 @@ You may adapt texts to your need with it. However, if you need to customize one 
 - ```data-suggestion-single```: to override suggestion_single in the config, will be vocalized when there is 1 suggestion.
 - ```data-suggestion-plural```: to override suggestion_plural in the config, will be vocalized when there are more several suggestions.
 - ```data-suggestion-word```: to override suggestion_word in the config.
+- ```data-combobox-min-length="xx"```: to override ```min_length``` in the config, a minimal length of text from which will be displayed suggestions.
 - ```data-combobox-notab-options="yes"```: if you don’t want to enable the <kbd>tab</kbd> key to go into/through suggestions.
 
 Have a look at [the second example of the demo](http://a11y.nicolas-hoffmann.net/autocomplet-list/) if you want to see data attributes in action.
