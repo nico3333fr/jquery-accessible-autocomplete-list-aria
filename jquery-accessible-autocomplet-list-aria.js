@@ -17,7 +17,10 @@ $(document).ready(function(){
        button_clear_title = 'clear this field',
        button_clear_text = 'X',
        case_sensitive = 'yes',
-       min_length = 0,
+       min_length = 0, 
+       limit_number_suggestions = 666,
+       search_option = 'beginning', // or 'containing'
+       see_more_text = 'See more results…',
        tablo_suggestions = [];
 
    if ( $js_combobox.length  ) { // if there are at least one :)
@@ -92,6 +95,10 @@ $(document).ready(function(){
 
       });
       
+      function do_see_more_option ( ) {
+          var $output_content = $('#js-codeit');
+          $output_content.html('You have to code a function or a redirection to display more results ;)');
+      }
       
       // listeners
       // keydown on field
@@ -110,10 +117,13 @@ $(document).ready(function(){
              $combobox_suggestion_word = typeof options_combo.suggestionWord !== 'undefined' ? options_combo.suggestionWord : suggestion_word,
              combobox_min_length = typeof options_combo.comboboxMinLength !== 'undefined' ? Math.abs(options_combo.comboboxMinLength) : min_length,
              $combobox_case_sensitive = typeof options_combo.comboboxCaseSensitive !== 'undefined' ? options_combo.comboboxCaseSensitive : case_sensitive,
+             combobox_limit_number_suggestions = typeof options_combo.comboboxLimitNumberSuggestions !== 'undefined' ? Math.abs(options_combo.comboboxLimitNumberSuggestions) : limit_number_suggestions,
+             $combobox_search_option = typeof options_combo.comboboxSearchOption !== 'undefined' ? options_combo.comboboxSearchOption : search_option,
+             $combobox_see_more_text = typeof options_combo.comboboxSeeMoreText !== 'undefined' ? options_combo.comboboxSeeMoreText : see_more_text,
              index_table = $this.attr('data-number'),
              value_to_search = $this.val(),
              text_number_suggestions = '';
-        
+
          if ( event.keyCode === 13  ) {
             $form.submit();
          }
@@ -129,19 +139,34 @@ $(document).ready(function(){
                
                  $suggestions.empty();
 				
-                 if ( value_to_search != '' && value_to_search.length > combobox_min_length ){
+                 if ( value_to_search != '' && value_to_search.length >= combobox_min_length ){
                      while ( i<size_tablo ) { 
-                           if ( 
-                               ( $combobox_case_sensitive==='yes' && tablo_suggestions[index_table][i].substring(0,value_to_search.length) === value_to_search )
-                               ||
-                               ( $combobox_case_sensitive==='no' && tablo_suggestions[index_table][i].substring(0,value_to_search.length).toUpperCase() === value_to_search.toUpperCase() )
-                              ) {
-                               $suggestions.append( '<div id="suggestion-' + index_table + '-' + counter + '" class="js-suggestion ' + $combobox_prefix_class + 'suggestion" tabindex="-1" role="option">' + tablo_suggestions[index_table][i] + '</div>' );
-                               counter++;
+                           if ( counter < combobox_limit_number_suggestions ) {
+                               if ( 
+                                   (
+                                     $combobox_search_option === 'containing' && 
+                                     ( $combobox_case_sensitive==='yes' && (tablo_suggestions[index_table][i].indexOf(value_to_search) >= 0) )
+                                     ||
+                                     ( $combobox_case_sensitive==='no' && (tablo_suggestions[index_table][i].toUpperCase().indexOf(value_to_search.toUpperCase()) >= 0) )
+                                   )
+                                   ||
+                                   (
+                                     $combobox_search_option === 'beginning' && 
+                                     ( $combobox_case_sensitive==='yes' && tablo_suggestions[index_table][i].substring(0,value_to_search.length) === value_to_search )
+                                     ||
+                                     ( $combobox_case_sensitive==='no' && tablo_suggestions[index_table][i].substring(0,value_to_search.length).toUpperCase() === value_to_search.toUpperCase() )
+                                   )
+                                  ) {
+                                   $suggestions.append( '<div id="suggestion-' + index_table + '-' + counter + '" class="js-suggestion ' + $combobox_prefix_class + 'suggestion" tabindex="-1" role="option">' + tablo_suggestions[index_table][i] + '</div>' );
+                                   counter++;
+                               }
                            }
                            i++;
                      }
-                  
+                     if ( counter >= combobox_limit_number_suggestions ) {
+                        $suggestions.append( '<div id="suggestion-' + index_table + '-' + counter + '" class="js-suggestion js-seemore ' + $combobox_prefix_class + 'suggestion" tabindex="-1" role="option">' + $combobox_see_more_text + '</div>' );
+                        counter++;
+                     }
                      // update number of suggestions
                      if ( counter > 1 ){
                         text_number_suggestions = $combobox_suggestion_plural + counter + ' ' + $combobox_suggestion_word + 's.';
@@ -238,12 +263,24 @@ $(document).ready(function(){
                }
             }
          if ( event.keyCode == 13 || event.keyCode == 32 ) { // Enter or space
-            $input_text.val( $this.html() );
-            $input_text.attr('data-lastval', $this.html() );
-            $suggestions.empty();
-            $suggestions_text.empty();
-            setTimeout(function(){ $input_text.focus(); }, 300); // timeout to avoid problem in suggestions display
-            event.preventDefault();
+            if ( $this.hasClass('js-seemore') ) {
+               $input_text.val($input_text.attr('data-lastval'));
+               $suggestions.empty();
+               $suggestions_text.empty();
+               setTimeout(function(){ $input_text.focus(); }, 300); // timeout to avoid problem in suggestions display
+               // go define the function you need when we click the see_more option
+               setTimeout(function(){ do_see_more_option(); }, 301); // timeout to avoid problem in suggestions display
+               event.preventDefault();
+            }
+            else {
+                  $input_text.val( $this.html() );
+                  $input_text.attr('data-lastval', $this.html() );
+                  $suggestions.empty();
+                  $suggestions_text.empty();
+                  setTimeout(function(){ $input_text.focus(); }, 300); // timeout to avoid problem in suggestions display
+                  event.preventDefault();
+                 }
+
             }
          if ( ( !event.shiftKey && event.keyCode == 9 && $autorise_tab_options ) || event.keyCode == 40 ) { // tab (if authorised) or bottom
             if ($next_suggestion.length) {
@@ -297,9 +334,19 @@ $(document).ready(function(){
              $suggestions = $container.find('.js-suggest div'),
              $suggestions_text = $container.find('.js-suggestion-text');
          
-         $input_text.val(value).focus();
-         $suggestions.empty();
-         $suggestions_text.empty();
+         if ( $this.hasClass('js-seemore') ) {
+            $suggestions.empty();
+            $suggestions_text.empty();
+            $input_text.focus();
+            // go define the function you need when we click the see_more option
+            do_see_more_option( );
+            }
+            else {
+                 $input_text.val(value).focus();
+                 $suggestions.empty();
+                 $suggestions_text.empty();
+                 }
+
       
       });
    
