@@ -58,19 +58,25 @@ var $js_combobox = $('.js-combobox'),
  button_clear_text = 'X',
  case_sensitive = 'yes',
  min_length = 0, 
+ limit_number_suggestions = 666,
+ search_option = 'beginning', // or 'containing'
+ see_more_text = 'See more results…',
  tablo_suggestions = [];
 ```
 
 You may adapt texts to your need with it. However, if you need to customize one autocomplete field, you may use ```data-*``` attributes to override global configuration. Here is the list:
 
-- ```data-combobox-prefix-class="foo"```: prefix all generated classes by .foo.
+- ```data-combobox-prefix-class="foo"```: prefix all generated classes by ```foo```.
 - ```data-combobox-case-sensitive="yes/no"```: plugin is case-sensitive by default, which means “KROW” will be before “Kron”. If you set it up to ```="no"```, the plugin will order all elements without caring of the case (see first example).
-- ```data-combobox-help-text```: to override default_text_help in the config.
-- ```data-combobox-button-title```: to override button_clear_title in the config, will be the title of the clear button.
-- ```data-suggestion-single```: to override suggestion_single in the config, will be vocalized when there is 1 suggestion.
-- ```data-suggestion-plural```: to override suggestion_plural in the config, will be vocalized when there are more several suggestions.
-- ```data-suggestion-word```: to override suggestion_word in the config.
+- ```data-combobox-help-text```: to override ```default_text_help``` in the config.
+- ```data-combobox-button-title```: to override ```button_clear_title``` in the config, will be the title of the clear button.
+- ```data-suggestion-single```: to override ```suggestion_single``` in the config, will be vocalized when there is 1 suggestion.
+- ```data-suggestion-plural```: to override ```suggestion_plural``` in the config, will be vocalized when there are more several suggestions.
+- ```data-suggestion-word```: to override ```suggestion_word``` in the config.
 - ```data-combobox-min-length="xx"```: to override ```min_length``` in the config, a minimal length of text from which will be displayed suggestions.
+- ```data-combobox-limit-number-suggestions="3"```: to override ```limit_number_suggestions```, the maximum number of suggestions displayed.
+- ```data-combobox-search-option="beginning/containing"```: when plugin is searching a match with <em>foo</em> in the suggestions, ```beginning``` value will search suggestions beginning with <em>foo</em>, ```containing``` will search suggestions containing <em>foo</em>.
+- ```data-combobox-see-more-text="<text>"```: if the number limit of suggestions is reached, the plugin will put this text as last suggestion.
 - ```data-combobox-notab-options="yes"```: if you don’t want to enable the <kbd>tab</kbd> key to go into/through suggestions.
 
 Have a look at [the second example of the demo](http://a11y.nicolas-hoffmann.net/autocomplet-list/) if you want to see data attributes in action.
