@@ -202,7 +202,7 @@ However, it is not prohibited to tell me that you’ve used it, or send me a lit
 
 ### Weight
 
-It is lightweight: 14kb(development), 6kb (minified), only 1.7kb minified and gzipped.
+It is lightweight: 19kb(development), 6.8kb (minified), only 2.1kb minified and gzipped.
 
 ###Tribute
 
