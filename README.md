@@ -1,7 +1,7 @@
 # jQuery accessible autocomplete list
 This jQuery plugin will transform and enhance a simple text input with a datalist into a wonderful and shiny input with autocomplete, and accessible.
 
-The demo is here: http://a11y.nicolas-hoffmann.net/autocomplet-list/
+The demo is here: https://a11y.nicolas-hoffmann.net/autocomplet-list/
 
 ## How it works
 
@@ -208,4 +208,4 @@ It is lightweight: 19kb(development), 6.8kb (minified), only 2.1kb minified and 
 
 The idea of this script is inspired by [Heydon’s basic autocomplete with listbox demo](https://twitter.com/heydonworks/status/655433134813655040). Aurélien Levy enhanced it with a working prototype, and I’ve finished the work (packaging, reutilisability, progressive enhancement, etc.) with Aurélien.
 
-<img src="http://www.nicolas-hoffmann.net/bordel/chuck-norris1.jpg" alt="Chuck Norris approved" />
+<img src="https://www.nicolas-hoffmann.net/bordel/chuck-norris1.jpg" alt="Chuck Norris approved" />
