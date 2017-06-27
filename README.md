@@ -1,7 +1,7 @@
 # jQuery accessible autocomplete list
 This jQuery plugin will transform and enhance a simple text input with a datalist into a wonderful and shiny input with autocomplete, and accessible.
 
-The demo is here: https://a11y.nicolas-hoffmann.net/autocomplet-list/
+The demo is here: https://a11y.nicolas-hoffmann.net/autocomplete-list/
 
 ## How it works
 
@@ -79,7 +79,7 @@ You may adapt texts to your need with it. However, if you need to customize one 
 - ```data-combobox-see-more-text="<text>"```: if the number limit of suggestions is reached, the plugin will put this text as last suggestion.
 - ```data-combobox-notab-options="yes"```: if you don’t want to enable the <kbd>tab</kbd> key to go into/through suggestions.
 
-Have a look at [the second example of the demo](http://a11y.nicolas-hoffmann.net/autocomplet-list/) if you want to see data attributes in action.
+Have a look at [the second example of the demo](http://a11y.nicolas-hoffmann.net/autocomplete-list/) if you want to see data attributes in action.
 
 ## How to style it
 
