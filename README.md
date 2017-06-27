@@ -12,7 +12,7 @@ This plugin:
 - then wraps the input into a container, adds status/help text zones and a “clear” button;
 - then it listens when you type something in the field, and proposes you some suggestions.
  
-##Why it is cool
+## Why it is cool
 
 As it is made using __progressive enhancement__, if the JavaScript fails to load or is blocked by your visitor, your website will still be ok.
 
@@ -22,7 +22,7 @@ It is __easy to customize__ there is a default configuration that can be changed
 
 For the design, you can also __customize the CSS to fullfil your needs__.
 
-##How to use it
+## How to use it
 
 First, add a class js-combobox on an input with a working datalist:
 ```
@@ -43,7 +43,7 @@ You may also get it from Bower: ```bower install jquery-accessible-autocomplete-
 
 You may use some options, so have a look at plugin options. 
 
-##Options
+## Options
 
 At the beginning of the plugin, a global configuration is available:
 ```
