@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     /*
      * jQuery accessible and keyboard-enhanced autocomplete list
-     * @version v1.5.4
+     * @version v1.5.6
      * Website: https://a11y.nicolas-hoffmann.net/autocomplet-list/
      * License MIT: https://github.com/nico3333fr/jquery-accessible-autocomplete-list-aria/blob/master/LICENSE
      */
@@ -148,13 +148,17 @@ $(document).ready(function() {
                                     if (
                                         (
                                             $combobox_search_option === 'containing' &&
-                                            ($combobox_case_sensitive === 'yes' && (tablo_suggestions[index_table][i].indexOf(value_to_search) >= 0)) ||
-                                            ($combobox_case_sensitive === 'no' && (tablo_suggestions[index_table][i].toUpperCase().indexOf(value_to_search.toUpperCase()) >= 0))
+                                            (
+                                                ($combobox_case_sensitive === 'yes' && (tablo_suggestions[index_table][i].indexOf(value_to_search) >= 0)) ||
+                                                ($combobox_case_sensitive === 'no' && (tablo_suggestions[index_table][i].toUpperCase().indexOf(value_to_search.toUpperCase()) >= 0))
+                                            )
                                         ) ||
                                         (
                                             $combobox_search_option === 'beginning' &&
-                                            ($combobox_case_sensitive === 'yes' && tablo_suggestions[index_table][i].substring(0, value_to_search.length) === value_to_search) ||
-                                            ($combobox_case_sensitive === 'no' && tablo_suggestions[index_table][i].substring(0, value_to_search.length).toUpperCase() === value_to_search.toUpperCase())
+                                            (
+                                                ($combobox_case_sensitive === 'yes' && tablo_suggestions[index_table][i].substring(0, value_to_search.length) === value_to_search) ||
+                                                ($combobox_case_sensitive === 'no' && tablo_suggestions[index_table][i].substring(0, value_to_search.length).toUpperCase() === value_to_search.toUpperCase())
+                                            )
                                         )
                                     ) {
                                         $suggestions.append('<div id="suggestion-' + index_table + '-' + counter + '" class="js-suggestion ' + $combobox_prefix_class + 'suggestion" tabindex="-1" role="option">' + tablo_suggestions[index_table][i] + '</div>');

@@ -3,7 +3,7 @@
   "description": "This jQuery plugin will transform and enhance a text input with a datalist into a shiny input with autocomplete, and accessible.",
   "homepage": "https://a11y.nicolas-hoffmann.net/autocomplete-list/",
   "main": "jquery-accessible-autocomplete-list-aria.js",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "keywords": [
     "Accessibility",
     "ARIA",
