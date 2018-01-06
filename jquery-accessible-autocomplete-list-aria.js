@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     /*
      * jQuery accessible and keyboard-enhanced autocomplete list
-     * @version v1.5.6
+     * @version v1.5.7
      * Website: https://a11y.nicolas-hoffmann.net/autocomplet-list/
      * License MIT: https://github.com/nico3333fr/jquery-accessible-autocomplete-list-aria/blob/master/LICENSE
      */
