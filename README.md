@@ -87,7 +87,7 @@ Have a look at [the second example of the demo](http://a11y.nicolas-hoffmann.net
 
 In these examples, I’ve used ```data-combobox-prefix-class="combobox"```, which means all classes will be prefixed by combobox-. Here are minimal styles needed:
 
-```
+```css
 .invisible {
   border: 0;
   clip: rect(0 0 0 0);
@@ -123,7 +123,7 @@ In these examples, I’ve used ```data-combobox-prefix-class="combobox"```, whic
 
 Here is a full example really nicer and more pleasant to use:
 
-```
+```css
 .invisible {
   border: 0;
   clip: rect(0 0 0 0);
@@ -206,7 +206,7 @@ However, it is not prohibited to tell me that you’ve used it, or send me a lit
 
 It is lightweight: 19kb(development), 6.8kb (minified), only 2.1kb minified and gzipped.
 
-###Tribute
+### Tribute
 
 The idea of this script is inspired by [Heydon’s basic autocomplete with listbox demo](https://twitter.com/heydonworks/status/655433134813655040). Aurélien Levy enhanced it with a working prototype, and I’ve finished the work (packaging, reutilisability, progressive enhancement, etc.) with Aurélien.
 
