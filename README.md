@@ -25,7 +25,7 @@ For the design, you can also __customize the CSS to fullfil your needs__.
 ## How to use it
 
 First, add a class js-combobox on an input with a working datalist:
-```
+```html
 <input type="text" name="mysuper_field" id="id_mysuper_field" class="js-combobox" list="beers" data-combobox-prefix-class="combobox" />
  <datalist id="beers">
   <option value="Meteor">
@@ -46,7 +46,7 @@ You may use some options, so have a look at plugin options.
 ## Options
 
 At the beginning of the plugin, a global configuration is available:
-```
+```js
 var $js_combobox = $('.js-combobox'),
  $body = $('body'),
  default_text_help = 'Use tabulation (or down) key to access and browse suggestions after input. Confirm your choice with enter key, or esc key to close suggestions box.',
@@ -54,6 +54,7 @@ var $js_combobox = $('.js-combobox'),
  suggestion_single = 'There is ',
  suggestion_plural = 'There are ',
  suggestion_word = 'suggestion',
+ suggestion_word_plural = 'suggestions',
  button_clear_title = 'clear this field',
  button_clear_text = 'X',
  case_sensitive = 'yes',
@@ -73,6 +74,7 @@ You may adapt texts to your need with it. However, if you need to customize one 
 - ```data-suggestion-single```: to override ```suggestion_single``` in the config, will be vocalized when there is 1 suggestion.
 - ```data-suggestion-plural```: to override ```suggestion_plural``` in the config, will be vocalized when there are more several suggestions.
 - ```data-suggestion-word```: to override ```suggestion_word``` in the config.
+- ```data-suggestion-word-plural```: to override ```suggestion_word_plural``` in the config.
 - ```data-combobox-min-length="xx"```: to override ```min_length``` in the config, a minimal length of text from which will be displayed suggestions.
 - ```data-combobox-limit-number-suggestions="3"```: to override ```limit_number_suggestions```, the maximum number of suggestions displayed.
 - ```data-combobox-search-option="beginning/containing"```: when plugin is searching a match with <em>foo</em> in the suggestions, ```beginning``` value will search suggestions beginning with <em>foo</em>, ```containing``` will search suggestions containing <em>foo</em>.

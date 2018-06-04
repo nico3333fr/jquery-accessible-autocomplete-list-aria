@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     /*
      * jQuery accessible and keyboard-enhanced autocomplete list
-     * @version v1.5.7
+     * @version v1.6.0
      * Website: https://a11y.nicolas-hoffmann.net/autocomplet-list/
      * License MIT: https://github.com/nico3333fr/jquery-accessible-autocomplete-list-aria/blob/master/LICENSE
      */
@@ -15,6 +15,7 @@ $(document).ready(function() {
         suggestion_single = 'There is ',
         suggestion_plural = 'There are ',
         suggestion_word = 'suggestion',
+        suggestion_word_plural = 'suggestions',
         button_clear_title = 'clear this field',
         button_clear_text = 'X',
         case_sensitive = 'yes',
@@ -119,6 +120,7 @@ $(document).ready(function() {
                     $combobox_suggestion_single = typeof options_combo.suggestionSingle !== 'undefined' ? options_combo.suggestionSingle : suggestion_single,
                     $combobox_suggestion_plural = typeof options_combo.suggestionPlural !== 'undefined' ? options_combo.suggestionPlural : suggestion_plural,
                     $combobox_suggestion_word = typeof options_combo.suggestionWord !== 'undefined' ? options_combo.suggestionWord : suggestion_word,
+                    $combobox_suggestion_word_plural = typeof options_combo.suggestionWord !== 'undefined' ? options_combo.suggestionWordPlural : suggestion_word_plural,
                     combobox_min_length = typeof options_combo.comboboxMinLength !== 'undefined' ? Math.abs(options_combo.comboboxMinLength) : min_length,
                     $combobox_case_sensitive = typeof options_combo.comboboxCaseSensitive !== 'undefined' ? options_combo.comboboxCaseSensitive : case_sensitive,
                     combobox_limit_number_suggestions = typeof options_combo.comboboxLimitNumberSuggestions !== 'undefined' ? Math.abs(options_combo.comboboxLimitNumberSuggestions) : limit_number_suggestions,
@@ -173,7 +175,7 @@ $(document).ready(function() {
                             }
                             // update number of suggestions
                             if (counter > 1) {
-                                text_number_suggestions = $combobox_suggestion_plural + counter + ' ' + $combobox_suggestion_word + 's.';
+                                text_number_suggestions = $combobox_suggestion_plural + counter + ' ' + $combobox_suggestion_word_plural + '.';
                             }
                             if (counter === 1) {
                                 text_number_suggestions = $combobox_suggestion_single + counter + ' ' + $combobox_suggestion_word + '.';
